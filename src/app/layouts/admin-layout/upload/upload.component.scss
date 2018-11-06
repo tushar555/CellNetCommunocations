@@ -1,0 +1,51 @@
+.card-file {
+    position: relative !important;
+    left: 169px !important;
+}
+
+.card-header-danger {
+    background: #9f9da6 !important;
+    box-shadow: none !important;
+}
+
+.btn {
+    background-color: #686161;
+}
+
+.card-category {
+    color: #e53935 !important;
+}
+
+.table-card {
+    .card [class*="card-header-"]:not(.card-header-icon):not(.card-header-text):not(.card-header-image) {
+        border-radius: 3px !important;
+        margin-top: -63px !important;
+        padding: 5px 0px 0px 18px !important;
+    }
+    .search {
+        width: 20rem;
+        display: inline;
+        position: relative;
+        left: 28rem;
+    }
+    .search-btn {
+        position: relative;
+        left: 28rem;
+        width: 12px;
+    }
+    .card-title {
+        display: inline !important;
+    }
+    ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #fff;
+        opacity: 1;
+        /* Firefox */
+    }
+    .table thead th {
+        font-size: 12px !important;
+    }
+    .table tbody tr {
+        font-size: 12px !important;
+    }
+}

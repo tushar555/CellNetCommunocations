@@ -1,0 +1,16 @@
+{
+    "userDetails": [{
+            "username": "admin",
+            "password": "admin",
+            "fullName": "Admin",
+            "EmpType": "admin"
+        },
+        {
+            "username": "employee1",
+            "password": "employee1",
+            "fullName": "Employee1",
+            "EmpType": "employee"
+        }
+    ],
+    "message": "Success"
+}

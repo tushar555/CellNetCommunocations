@@ -1,0 +1,27 @@
+{
+    "abc": [{
+            "path": "/cellnet/user-profile",
+            "title": "User Profile",
+            "icon": "person",
+            "class": ""
+        },
+        {
+            "path": "/cellnet/table-list",
+            "title": "Table List",
+            "icon": "content_paste",
+            "class": ""
+        },
+        {
+            "path": "/cellnet/typography",
+            "title": "Typography",
+            "icon": "library_books",
+            "class": ""
+        },
+        {
+            "path": "/cellnet/icons",
+            "title": "icons",
+            "icon": "bubble_chart",
+            "class": ""
+        }
+    ]
+}

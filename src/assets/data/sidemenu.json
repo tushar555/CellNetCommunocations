@@ -1,0 +1,59 @@
+{
+    "adminsidemenu": [{
+            "path": "/cellnet/admin-dashboard",
+            "title": "Dashboard",
+            "icon": "dashboard",
+            "class": ""
+        },
+        {
+            "path": "/cellnet/upload-csv",
+            "title": "Upload CSV",
+            "icon": "person",
+            "class": ""
+        },
+        {
+            "path": "/cellnet/view-data",
+            "title": "Show Data",
+            "icon": "person",
+            "class": ""
+        },
+        {
+            "path": "/cellnet/emp-details",
+            "title": "Add/Delete Employee",
+            "icon": "person",
+            "class": ""
+        },
+        {
+            "path": "/cellnet/user-profile",
+            "title": "Logout",
+            "icon": "person",
+            "class": ""
+        }
+    ],
+    "employeesidemenu": [{
+            "path": "/cellnet/emp-dashboard",
+            "title": "Dashboard",
+            "icon": "dashboard",
+            "class": "",
+            "isAdminModule": true
+        },
+        {
+            "path": "/maps",
+            "title": "Maps",
+            "icon": "location_on",
+            "class": ""
+        },
+        {
+            "path": "/notifications",
+            "title": "Notifications",
+            "icon": "notifications",
+            "class": ""
+        },
+        {
+            "path": "/upgrade",
+            "title": "Upgrade to PRO",
+            "icon": "unarchive",
+            "class": "active-pro"
+        }
+    ]
+}

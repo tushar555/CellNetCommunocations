@@ -1,0 +1,165 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row" *ngIf='!showSearchData'>
+      <div class="col-md-8">
+        <div class="card card-file">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Upload CSV file Here</h4>
+            <!-- <p class="card-category">Complete your profile</p> -->
+          </div>
+          <div class="card-body">
+            <form [formGroup]="initialForm">
+              <div class="row">
+                <div class="col-md-5">
+                  <!-- <h4>Basic native select</h4> -->
+                  <mat-form-field class="example-full-width">
+                    <mat-select formControlName="bankName" placeholder="Bank Name">
+                      <mat-option *ngFor="let bank of BankNameArray" [value]="bank.value">
+                        {{bank.Name}}
+                      </mat-option>
+                    </mat-select>
+
+                  </mat-form-field>
+                  <!-- <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Company (disabled)" disabled>
+                  </mat-form-field> -->
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field class="example-full-width">
+                    <mat-select formControlName="productName" placeholder="Product Name">
+                      <mat-option *ngFor="let pr of ProductArray" [value]="pr.value">
+                        {{pr.Name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <!-- <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Email address" type="email">
+                  </mat-form-field>
+                </div> -->
+              </div>
+              <!-- <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Fist Name" type="text">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Last Name" type="text">
+                  </mat-form-field>
+                </div>
+              </div> -->
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- <mat-form-field class="example-full-width"> -->
+                  <input placeholder="Adress" (change)='selectFile($event)' type="file">
+                  <!-- </mat-form-field> -->
+                </div>
+                <p *ngIf='notCorrectFile' class="card-category">File format not supported (xlsx, xls, csv only)</p>
+
+              </div>
+              <!-- <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="City" type="text">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Country" type="text">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Postal Code" type="text">
+                  </mat-form-field>
+                </div>
+              </div> -->
+
+              <button mat-raised-button type="submit" [disabled]='!initialForm.valid  || !fileSelected || notCorrectFile' (click)="uploadCSV()"
+                class=" btn pull-right">Upload File</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+    <!-- <div class="row table-card" *ngIf='showSearchData'>
+      <div class="col-md-12">
+        <div class="card card-plain">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title mt-0"> Table on Plain Background</h4>
+            <input type="text" value="" class="form-control search" placeholder="Search...">
+            <button mat-raised-button type="submit" class="search-btn btn btn-white btn-round btn-just-icon">
+                  <i class="material-icons">search</i>
+                  <div class="ripple-container"></div>
+              </button>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              
+            
+              <table class="table table-hover">
+                <thead>
+                  <th class="tbl-th" *ngFor="let title of titleArray">
+                  {{title.v}} 
+                  </th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td *ngFor="let info of infoArray">
+                    
+                       {{info.v}} 
+                    </td>
+                  </tr>
+                </tbody>
+              </table> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- ************************************************************************************ -->
+    <!-- <div class="row  table-card">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Simpleaa Table</h4>
+            <input type="text" value="" class="form-control search" placeholder="Search...">
+            <button mat-raised-button type="submit" class="search-btn btn btn-white btn-round btn-just-icon">
+                  <i class="material-icons">search</i>
+                  <div class="ripple-container"></div>
+              </button>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th class="tbl-th" *ngFor="let title of titleArray">
+                    {{title.v}}
+                  </th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td *ngFor="let info of infoArray">
+                      {{info.v}}
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+  </div>
+</div>
