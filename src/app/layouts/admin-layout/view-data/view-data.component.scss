@@ -7,14 +7,12 @@
 .search {
     width: 20rem;
     display: inline;
-    position: relative;
-    left: 37rem;
+    position: relative; //left: 37rem;
 }
 
 .search-btn {
-    position: relative;
-    left: 37rem;
-    width: 12px;
+    position: relative; // left: 37rem;
+    // width: 12px;
 }
 
 .card-title {
@@ -24,6 +22,7 @@
 .card-header-danger {
     background: #686161 !important;
     box-shadow: none !important;
+    padding: 4px !important;
 }
 
 ::placeholder {

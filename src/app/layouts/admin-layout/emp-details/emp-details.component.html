@@ -8,23 +8,23 @@
           <div class="card-header card-header-tabs card-header-primary">
             <div class="nav-tabs-navigation">
               <div class="nav-tabs-wrapper">
-                <span class="nav-tabs-title">Tasks:</span>
+                <!-- <span class="nav-tabs-title">Type:</span> -->
                 <ul class="nav nav-tabs" data-tabs="tabs">
-                  <li class="nav-item">
+                  <li class="nav-item" (click)="changeEmployee('admin')">
                     <a mat-button class="nav-link active" href="#profile" data-toggle="tab">
-                                          <i class="material-icons">bug_report</i> Bugs
+                                          <i class="material-icons">assignment_ind</i> Admin
                                           <div class="ripple-container"></div>
                                       </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" (click)="changeEmployee('TL')">
                     <a mat-button class="nav-link" href="#messages" data-toggle="tab">
-                                          <i class="material-icons">code</i> Website
+                                          <i class="material-icons">assignment_ind</i> Team Leader
                                           <div class="ripple-container"></div>
                                       </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" (click)="changeEmployee('employee')">
                     <a mat-button class="nav-link" href="#settings" data-toggle="tab">
-                                          <i class="material-icons">cloud</i> Server
+                                          <i class="material-icons">assignment_ind</i> Caller/Tracer
                                           <div class="ripple-container"></div>
                                       </a>
                   </li>
@@ -37,7 +37,7 @@
               <div class="tab-pane active" id="profile">
                 <table class="table">
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let emp of empListArray">
                       <td>
                         <div class="form-check">
                           <label class="form-check-label">
@@ -48,77 +48,17 @@
                                                   </label>
                         </div>
                       </td>
-                      <td>Sign contract for "What are conference organizers afraid of?"</td>
+                      <td>{{emp.full_name}}</td>
+                      <td> {{emp.id}}</td>
+                      <td>{{emp.username}}</td>
+                      <td>{{emp.role}}</td>
+                      <td>{{emp.contact}}</td>
+
                       <td class="td-actions text-right">
-                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                        <button mat-raised-button type="button" (click)="edit()" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
                                                   <i class="material-icons">edit</i>
                                               </button>
-                        <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                                  <i class="material-icons">close</i>
-                                              </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="form-check">
-                          <label class="form-check-label">
-                                                      <input class="form-check-input" type="checkbox" value="">
-                                                      <span class="form-check-sign">
-                                                          <span class="check"></span>
-                                                      </span>
-                                                  </label>
-                        </div>
-                      </td>
-                      <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                      <td class="td-actions text-right">
-                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                                  <i class="material-icons">edit</i>
-                                              </button>
-                        <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                                  <i class="material-icons">close</i>
-                                              </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="form-check">
-                          <label class="form-check-label">
-                                                      <input class="form-check-input" type="checkbox" value="">
-                                                      <span class="form-check-sign">
-                                                          <span class="check"></span>
-                                                      </span>
-                                                  </label>
-                        </div>
-                      </td>
-                      <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through
-                        metro Detroit
-                      </td>
-                      <td class="td-actions text-right">
-                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                                  <i class="material-icons">edit</i>
-                                              </button>
-                        <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                                                  <i class="material-icons">close</i>
-                                              </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="form-check">
-                          <label class="form-check-label">
-                                                      <input class="form-check-input" type="checkbox" value="" checked>
-                                                      <span class="form-check-sign">
-                                                          <span class="check"></span>
-                                                      </span>
-                                                  </label>
-                        </div>
-                      </td>
-                      <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                      <td class="td-actions text-right">
-                        <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                                  <i class="material-icons">edit</i>
-                                              </button>
-                        <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                        <button mat-raised-button type="button" (click)="delete()" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
                                                   <i class="material-icons">close</i>
                                               </button>
                       </td>
@@ -126,7 +66,7 @@
                   </tbody>
                 </table>
               </div>
-              <div class="tab-pane" id="messages">
+              <!-- <div class="tab-pane" id="messages">
                 <table class="table">
                   <tbody>
                     <tr>
@@ -175,8 +115,8 @@
                     </tr>
                   </tbody>
                 </table>
-              </div>
-              <div class="tab-pane" id="settings">
+              </div> -->
+              <!-- <div class="tab-pane" id="settings">
                 <table class="table">
                   <tbody>
                     <tr>
@@ -246,7 +186,7 @@
                     </tr>
                   </tbody>
                 </table>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

@@ -10,4 +10,6 @@ export class Constant {
     public static sidemenu = Constant.LocalHost_Base_Url + 'sidemenu.json'
 
     public static showTotalRecords = Constant.BASE_URL + 'showTotalRecords.php';
+
+    public static getEmpDetails = Constant.BASE_URL + 'getEmpDetails.php';
 }
