@@ -17,7 +17,8 @@ body {
     position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
-    padding: 70px 30px;
+    padding: 94px 31px;
+
 }
 
 .avatar {
@@ -74,7 +75,13 @@ input[type="password"] {
     cursor: pointer; //  background: #ffc107;
     color: #000;
 }
+::placeholder{
+    color: #000
+}
 
+.mat-form-field-wrapper{
+    padding: 0 !important;
+}
 .loginbox a {
     text-decoration: none;
     font-size: 12px;

@@ -14,6 +14,7 @@ import { AuthGuard } from '../../authguard/auth.guard'
 import { UploadComponent } from '../admin-layout/upload/upload.component';
 import { ViewDataComponent } from '../admin-layout/view-data/view-data.component'
 import { EmpDetailsComponent } from "app/layouts/admin-layout/emp-details/emp-details.component";
+import { FeedbackFormComponent } from '../admin-layout/feedback-form/feedback-form.component'
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -78,6 +79,12 @@ export const AdminLayoutRoutes: Routes = [
                 path: 'emp-details',
                 canActivateChild: [AuthGuard],
                 component: EmpDetailsComponent,
+                data: { roles: ['employee'] }
+            },
+            {
+                path: 'feedback-form',
+                canActivateChild: [AuthGuard],
+                component: FeedbackFormComponent,
                 data: { roles: ['employee'] }
             },
             {

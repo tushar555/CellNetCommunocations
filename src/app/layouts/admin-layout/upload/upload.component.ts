@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
 import * as XLSX from 'ts-xlsx';
+import { CommonService } from "app/service/common.service";
+import { Constant } from "assets/data/constant";
+import { NgxSpinnerService } from 'ngx-spinner';
+import { RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'app-upload',
@@ -8,6 +12,7 @@ import * as XLSX from 'ts-xlsx';
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
+  formData: any;
   titleArray: any[];
   infoArray: any[];
 
@@ -23,7 +28,7 @@ export class UploadComponent implements OnInit {
   arrayBuffer: any;
   file: File;
 
-  constructor(public formbuilder: FormBuilder) {
+  constructor(public spinner: NgxSpinnerService, public formbuilder: FormBuilder, public common: CommonService) {
 
     this.initialForm = this.formbuilder.group({
       'bankName': ['', Validators.required],
@@ -74,51 +79,73 @@ export class UploadComponent implements OnInit {
   ngOnInit() {
   }
 
-  uploadCSV() {
-    this.showSearchData = true;
+  uploadCSV(event) {
+    this.spinner.show();
+    // this.showSearchData = true;
+    let file = this.file;//event.srcElement.files[0];
+    //let URL = Constant.uploadFile;
+console.log('Formadta',this.formData);
+console.log('Formadta',this.file);
+//debugger;
+    let URL = Constant.uploadFile;
+ 
+    this.common.postDataService(URL, this.formData, ).subscribe((resp) => {
+      console.log('RESP', resp);
+      this.spinner.hide();
+    }, (error) => {
+      console.log('Error', error);
+      this.spinner.hide();
+    })
   }
 
   selectFile(eve) {
     console.log(eve.target.files[0].name.split('.').pop() == 'xlsx');
-    this.file = eve.target.files[0]
+    this.file = eve.target.files[0];
+    // alert('HELLoo', )
+    this.formData = new FormData();
+   // this.formData.append('file',)
+  // debugger;
+    this.formData.append('selectFile', this.file, this.file.name);
+
+console.log('Formadta',this.file);
 
 
-    let fileReader = new FileReader();
-    fileReader.onload = (e) => {
-      this.arrayBuffer = fileReader.result;
-      var data = new Uint8Array(this.arrayBuffer);
-      var arr = new Array();
-      for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-      var bstr = arr.join("");
-      var workbook = XLSX.read(bstr, { type: "binary" });
-      var first_sheet_name = workbook.SheetNames[0];
-      var worksheet = workbook.Sheets[first_sheet_name];
-      let j = 0;
-      this.titleArray = [];
-      this.infoArray = [];
-      //console.log(worksheet);
-      for (var key in worksheet) {
-        // if (j >= 120 && j !== 0) {
-        //   this.infoArray.push(worksheet[key]);
-        // } else if (j !== 0) {
-        //   this.titleArray.push(worksheet[key]);
-        // }
-        // j++
+    // let fileReader = new FileReader();
+    // fileReader.onload = (e) => {
+    //   this.arrayBuffer = fileReader.result;
+    //   var data = new Uint8Array(this.arrayBuffer);
+    //   var arr = new Array();
+    //   for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+    //   var bstr = arr.join("");
+    //   var workbook = XLSX.read(bstr, { type: "binary" });
+    //   var first_sheet_name = workbook.SheetNames[0];
+    //   var worksheet = workbook.Sheets[first_sheet_name];
+    //   let j = 0;
+    //   this.titleArray = [];
+    //   this.infoArray = [];
+    //   //console.log(worksheet);
+    //   for (var key in worksheet) {
+    //     // if (j >= 120 && j !== 0) {
+    //     //   this.infoArray.push(worksheet[key]);
+    //     // } else if (j !== 0) {
+    //     //   this.titleArray.push(worksheet[key]);
+    //     // }
+    //     // j++
 
-        console.log('WorkSheet', worksheet[key]);
-        j++
-      }
-      console.log(j);
+    //     console.log('WorkSheet', worksheet[key]);
+    //     j++
+    //   }
+    //   console.log(j);
 
-      // for (let p = 0; this.titleArray.length - this.infoArray.length; p++) {
-      //   this.infoArray.push({ v: "" })
-      // }
-      console.log('Title', this.titleArray);
-      console.log('extraData', this.infoArray);
+    //   // for (let p = 0; this.titleArray.length - this.infoArray.length; p++) {
+    //   //   this.infoArray.push({ v: "" })
+    //   // }
+    //   console.log('Title', this.titleArray);
+    //   console.log('extraData', this.infoArray);
 
-    }
+    // }
 
-    fileReader.readAsArrayBuffer(this.file);
+    // fileReader.readAsArrayBuffer(this.file);
     //  console.log('JJJJJ', fileReader.readAsArrayBuffer(this.file));
 
     if (eve.target.files[0].name.split('.').pop() != 'xlsx' && eve.target.files[0].name.split('.').pop() != 'xls' && eve.target.files[0].name.split('.').pop() != 'csv') {

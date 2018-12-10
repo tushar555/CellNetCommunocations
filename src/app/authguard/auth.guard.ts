@@ -8,7 +8,7 @@ export class AuthGuard implements CanActivate {
   constructor(public localstorage: LocalStorageService) { }
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    if (this.localstorage.get('userDetails') !== undefined || this.localstorage.get('userDetails') !== null) {
+    if (this.localstorage.get('userDetails') !== undefined && this.localstorage.get('userDetails') !== null) {
       return true
     } else
       return false
@@ -17,6 +17,15 @@ export class AuthGuard implements CanActivate {
 
   canActivateChild(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
+    console.log('HELLLO',this.localstorage.get('userDetails'));
+    
+    if (this.localstorage.get('userDetails') !== undefined && this.localstorage.get('userDetails') !== null) {
+      return true
+    } else{
+      
+      return false
+      
+    }
     // let roles = next.data["roles"] as Array<string>;
     // console.log('data roles : ' + roles);
     //   console.log(next);
@@ -33,7 +42,7 @@ export class AuthGuard implements CanActivate {
     // //   return false
     // // }
     // //
-    return true
+    
     // } else {
     //console.log('aaalalalala');
 

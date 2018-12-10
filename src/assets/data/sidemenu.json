@@ -8,29 +8,29 @@
         {
             "path": "/cellnet/upload-csv",
             "title": "Upload CSV",
-            "icon": "person",
+            "icon": "cloud_upload",
             "class": ""
         },
         {
             "path": "/cellnet/view-data",
             "title": "Show Data",
-            "icon": "person",
+            "icon": "pageview",
             "class": ""
         },
         {
             "path": "/cellnet/emp-details",
             "title": "Add/Delete Employee",
-            "icon": "person",
+            "icon": "border_color",
             "class": ""
         },
         {
             "path": "/cellnet/user-profile",
             "title": "Logout",
-            "icon": "person",
+            "icon": "power_settings_new",
             "class": ""
         }
     ],
-    "employeesidemenu": [{
+    "teamleadersidemenu": [{
             "path": "/cellnet/emp-dashboard",
             "title": "Dashboard",
             "icon": "dashboard",
@@ -38,22 +38,43 @@
             "isAdminModule": true
         },
         {
-            "path": "/maps",
-            "title": "Maps",
+            "path": "/cellnet/feedback-form",
+            "title": "Assign work",
             "icon": "location_on",
             "class": ""
         },
         {
-            "path": "/notifications",
-            "title": "Notifications",
+            "path": "",
+            "title": "My Profile",
+            "icon": "notifications",
+            "class": ""
+        },
+        
+        {
+            "path": "/cellnet/user-profile",
+            "title": "Logout",
+            "icon": "power_settings_new",
+            "class": ""
+        }
+    ],
+    "otherempsidemenu": [{
+            "path": "/cellnet/emp-dashboard",
+            "title": "Dashboard",
+            "icon": "dashboard",
+            "class": "",
+            "isAdminModule": true
+        },
+        {
+            "path": "",
+            "title": "My Profile",
             "icon": "notifications",
             "class": ""
         },
         {
-            "path": "/upgrade",
-            "title": "Upgrade to PRO",
-            "icon": "unarchive",
-            "class": "active-pro"
+            "path": "/cellnet/user-profile",
+            "title": "Logout",
+            "icon": "power_settings_new",
+            "class": ""
         }
     ]
 }

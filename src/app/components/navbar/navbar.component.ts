@@ -4,6 +4,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service'
 import { CommonService } from '../../service/common.service';
+import { LocalStorageService } from 'ngx-store';
 
 @Component({
     selector: 'app-navbar',
@@ -16,11 +17,14 @@ export class NavbarComponent implements OnInit {
     mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    role: any;
+    private searchText:string = '';
 
-    constructor(public common: CommonService, location: Location, private element: ElementRef, private router: Router,
+    constructor(public localstorage: LocalStorageService, public common: CommonService, location: Location, private element: ElementRef, private router: Router,
         public auth: AuthService) {
         this.location = location;
         this.sidebarVisible = false;
+        this.role =  this.localstorage.get('userDetails').role    
     }
 
     ngOnInit() {
@@ -125,6 +129,12 @@ export class NavbarComponent implements OnInit {
             }
         }
         return 'Dashboard';
+    }
+
+    search(){
+       
+       console.log("searchText", this.searchText, "role", this.role);
+        
     }
 
     logout() {

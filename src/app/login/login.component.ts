@@ -35,15 +35,18 @@ export class LoginComponent implements OnInit {
         //this.localstorage.set('userDetails', response.userDetails)
         let type = 'admin';
         this.spinner.hide();
-        if (type == 'admin') {
-          this.router.navigate(['/cellnet/admin-dashboard']);
-        } else {
-          this.router.navigate(['/cellnet/emp-dashboard']);
-        }
-      } else {
-        this.spinner.hide();
 
-      }
+        if (type == 'admin') {
+
+          this.router.navigate(['/cellnet/admin-dashboard']);
+
+        } else {
+
+          this.router.navigate(['/cellnet/emp-dashboard']);
+
+        }
+
+      } 
     }, (error) => {
       this.spinner.hide();
       console.log('error', error);
@@ -64,13 +67,22 @@ export class LoginComponent implements OnInit {
 
       if (response.responseMsg === 'Success') {
         this.localstorage.set('userDetails', response.userDetails)
+        this.common.showSnackbar({ 'status': 'Logged In Successfully!' })
+      
         if (response.userDetails.role === 'admin') {
+
           this.router.navigate(['/cellnet/admin-dashboard']);
         } else {
           this.router.navigate(['/cellnet/emp-dashboard']);
         }
       } else {
-        console.log('Something Went wrong');
+        this.spinner.hide();
+
+        if(response.errTitle === 'wrong_password'){
+          this.common.showSnackbar({ 'status': 'Invalid Credentials!' })
+          
+        }
+
       }
       this.spinner.hide();
     }, (error) => {

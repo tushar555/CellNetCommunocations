@@ -48,11 +48,11 @@ export class SidebarComponent implements OnInit {
             console.log('RESP', response);
 
             if (this.EmpType === 'admin') {
-
                 this.menuItems = response.adminsidemenu
-            } else {
-
-                this.menuItems = response.employeesidemenu
+            } else if(this.EmpType === 'teamleader'){
+                this.menuItems = response.teamleadersidemenu
+            }else{
+                this.menuItems = response.otherempsidemenu
             }
         })
     }
@@ -68,9 +68,10 @@ export class SidebarComponent implements OnInit {
             this.auth.doLogout();
             this.router.navigate(['/login']);
             this.common.showSnackbar({ 'status': 'Logged out Successfully!' })
-        } else {
+        } else if(menuItem.path === ''){
+            this.common.showSnackbar({ 'status': 'Comming Soon!' })
+        }else{
             this.router.navigate([menuItem.path]);
-
         }
         // else if (menuItem.title === 'Add/Delete Employee') {
         //  this.common.showSnackbar({ 'status': 'Coming soon' })

@@ -4,6 +4,7 @@ import { LocalStorageService } from "ngx-store";
 import { CommonService } from '../../../service/common.service'
 import { Constant } from "assets/data/constant";
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,13 +12,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  countResponse: Object;
+  countResponse: any;
   monthsArray: string[];
 
   currentMonth: any;
-  constructor(public route: Router, public common: CommonService, public localstorage: LocalStorageService) {
+  constructor(public spinner: NgxSpinnerService, public route: Router, public common: CommonService, public localstorage: LocalStorageService) {
     console.log('STORAGE', this.localstorage.get('userDetails'));
-    this.monthsArray = ['January', "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    this.monthsArray = ['Jan', "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
 
     this.currentMonth = this.monthsArray[new Date().getMonth()];
     console.log('MONTH', this.currentMonth);
@@ -25,13 +26,14 @@ export class DashboardComponent implements OnInit {
   }
 
   getTotalCount() {
+    this.spinner.show();
     let URL = Constant.showTotalRecords;
     this.common.getData(URL).subscribe((response) => {
       console.log(response);
       this.countResponse = response;
     })
 
-
+    this.spinner.hide();
   }
   startAnimationForLineChart(chart) {
     let seq: any, delays: any, durations: any;

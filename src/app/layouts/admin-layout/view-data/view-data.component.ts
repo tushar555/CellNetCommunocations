@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Constant } from "assets/data/constant";
 import { CommonService } from "app/service/common.service";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-view-data',
@@ -11,7 +12,7 @@ export class ViewDataComponent implements OnInit {
   filterArray: { 'property': string; 'value': string; }[];
   optionsArray: any = [];
 
-  constructor(public common: CommonService) {
+  constructor(public common: CommonService, public spinner: NgxSpinnerService) {
     this.filterArray = [
       {
         'property': 'Employee Name',
@@ -26,6 +27,7 @@ export class ViewDataComponent implements OnInit {
 
   onChange(event) {
     console.log('Event', event);
+    this.spinner.show();
     if (event === 'Employee') {
       if (this.optionsArray.length === 0) {
         let URL = Constant.getEmpDetails;
@@ -35,6 +37,7 @@ export class ViewDataComponent implements OnInit {
       }
 
     }
+    this.spinner.hide();
 
   }
 

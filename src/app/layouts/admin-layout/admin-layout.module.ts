@@ -24,6 +24,7 @@ import { EmpDashboardComponent } from './emp-dashboard/emp-dashboard.component';
 import { UploadComponent } from "./upload/upload.component";
 import { ViewDataComponent } from './view-data/view-data.component';
 import { EmpDetailsComponent } from './emp-details/emp-details.component';
+import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { EmpDetailsComponent } from './emp-details/emp-details.component';
     EmpDashboardComponent,
     UploadComponent,
     ViewDataComponent,
-    EmpDetailsComponent
+    EmpDetailsComponent,
+    FeedbackFormComponent
   ]
 })
 
