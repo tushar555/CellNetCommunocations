@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
+.font-12{
+    font-size: 12px !important;
+}
+
+.font-12-b{
+    font-size: 12px !important;
+    font-weight: bold !important;
+}
+
+.font-14{
+    font-size: 14px !important;
+}
+
+.font-14-b{
+    font-size: 14px !important;
+    font-weight: bold !important;
+}
