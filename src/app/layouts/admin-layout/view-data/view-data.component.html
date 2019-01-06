@@ -6,14 +6,43 @@
           <div class="card-header card-header-danger">
             <div class="row">
 
-              <div class="col-md-4" style="    padding-top: 4.4px;">
+
+              <div class="col col-md-4">
+                <!-- <h4 class="card-title mt-0"> Table</h4> -->
+                
+                <mat-form-field class="example-full-width">
+                  <mat-select [(ngModel)]="bankName" placeholder="Bank Name"  (selectionChange)="showData($event.value)">
+                    <mat-option *ngFor="let bank of BankNameArray" [value]="bank.value">
+                      {{bank.Name}}
+                    </mat-option>
+                  </mat-select>
+  
+                </mat-form-field>
+              </div>
+              <div class="col col-md-4">
+                <mat-form-field class="example-full-width">
+                  <mat-select [(ngModel)]="productName" placeholder="Product Name"  (selectionChange)="showData($event.value)">
+                    <mat-option *ngFor="let pr of ProductArray" [value]="pr.value">
+                      {{pr.Name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col col-md-4">
+                  <button mat-raised-button type="submit"  class=" btn pull-right">Show Duplicate Data</button>
+               </div> 
+          
+            </div>
+            
+            <div class="row" *ngIf="showDiv">
+            <div class="col-md-3" style=" padding-top: 4.4px;">
                 <input type="text" value="" class="form-control search" placeholder="Search">
                 <!-- <button mat-raised-button type="submit" class="search-btn btn btn-white btn-round btn-just-icon">
                       <i class="material-icons">search</i>
                       <div class="ripple-container"></div>
                   </button> -->
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <mat-form-field style="width: 14rem;">
                   <mat-select placeholder="Filter By" (selectionChange)="onChange($event.value)">
                     <mat-option *ngFor="let filter of filterArray" [value]="filter.value">
@@ -22,7 +51,7 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <!-- <h4 class="card-title mt-0"> Table</h4> -->
                 <mat-form-field style="width: 14rem;">
                   <mat-select placeholder="Select">
@@ -32,14 +61,18 @@
                   </mat-select>
                 </mat-form-field>
               </div>
+            
+
             </div>
             <!-- <p class="card-category"> Here is a subtitle for this table</p> -->
-
+        
           </div>
+
+         
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-hover">
-                <thead>
+                <thead class="thead-background"> 
                   <th class="font-12-b">
                     ID
                   </th>
@@ -70,7 +103,7 @@
                     <td>
                       Oud-Turnhout
                     </td>
-                    <td>
+                    <td (click)="showMoreData()">
                       $36,738
                     </td>
                   </tr>
@@ -168,3 +201,22 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="conformationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Declaration {{actionType}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        extra Data
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-deny" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-yes" data-dismiss="modal" (click)="adminApproveReject()">Yes</button>
+      </div>
+    </div>
+  </div>

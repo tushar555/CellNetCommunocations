@@ -27,12 +27,14 @@ export class UploadComponent implements OnInit {
 
   arrayBuffer: any;
   file: File;
+  FileArray: any[];
 
   constructor(public spinner: NgxSpinnerService, public formbuilder: FormBuilder, public common: CommonService) {
 
     this.initialForm = this.formbuilder.group({
       'bankName': ['', Validators.required],
-      'productName': ['', Validators.required]
+      'productName': ['', Validators.required],
+      'fileType':['', Validators.required]
     })
     this.BankNameArray = [
       {
@@ -73,6 +75,16 @@ export class UploadComponent implements OnInit {
 
     ]
 
+    this.FileArray = [
+      {
+        'Name': 'Raw Data',
+        'value': 'raw'
+      },
+      {
+        'Name': 'Allocation file',
+        'value': 'allocation'
+      } 
+    ]
 
   }
 
@@ -81,15 +93,18 @@ export class UploadComponent implements OnInit {
 
   uploadCSV(event) {
     this.spinner.show();
+    let URL= '';
     // this.showSearchData = true;
     let file = this.file;//event.srcElement.files[0];
     //let URL = Constant.uploadFile;
-console.log('Formadta',this.formData);
-console.log('Formadta',this.file);
-//debugger;
-    let URL = Constant.uploadFile;
- 
-    this.common.postDataService(URL, this.formData, ).subscribe((resp) => {
+    if(this.formData.fileType === 'raw') 
+        URL = Constant.uploadFile;
+    else 
+        URL = ''; 
+
+    let data = Object.assign({}, this.formData);
+
+    this.common.postDataService(URL, data).subscribe((resp) => {
       console.log('RESP', resp);
       this.spinner.hide();
     }, (error) => {
@@ -106,8 +121,6 @@ console.log('Formadta',this.file);
    // this.formData.append('file',)
   // debugger;
     this.formData.append('selectFile', this.file, this.file.name);
-
-console.log('Formadta',this.file);
 
 
     // let fileReader = new FileReader();

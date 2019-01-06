@@ -3,6 +3,8 @@ import { Constant } from "assets/data/constant";
 import { CommonService } from "app/service/common.service";
 import { NgxSpinnerService } from 'ngx-spinner';
 
+declare var jquery: any;
+declare var $: any;
 @Component({
   selector: 'app-view-data',
   templateUrl: './view-data.component.html',
@@ -11,6 +13,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class ViewDataComponent implements OnInit {
   filterArray: { 'property': string; 'value': string; }[];
   optionsArray: any = [];
+  BankNameArray: { 'Name': string; 'value': string; }[];
+  ProductArray: { 'Name': string; 'value': string; }[];
+  showDiv:any;
+  bankName:any;
+  productName:any;
 
   constructor(public common: CommonService, public spinner: NgxSpinnerService) {
     this.filterArray = [
@@ -23,6 +30,46 @@ export class ViewDataComponent implements OnInit {
         'value': 'Client'
       }
     ]
+
+    this.BankNameArray = [
+      {
+        'Name': 'ICICI',
+        'value': 'icici'
+      },
+      {
+        'Name': 'Yes Bank',
+        'value': 'yes_bank'
+      },
+      {
+        'Name': 'HDFC Bank',
+        'value': 'hdfc_bank'
+      },
+      {
+        'Name': 'Bajaj Finserve',
+        'value': 'bajaj_finserve'
+      }
+    ]
+
+    this.ProductArray = [
+      {
+        'Name': 'Personal Loans',
+        'value': 'personal_loan'
+      },
+      {
+        'Name': 'Home Loans',
+        'value': 'home_loan'
+      },
+      {
+        'Name': 'Auto Loans',
+        'value': 'auto_loan'
+      },
+      {
+        'Name': 'Credit Cards',
+        'value': 'cc'
+      }
+
+    ]
+
   }
 
   onChange(event) {
@@ -42,6 +89,20 @@ export class ViewDataComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  showMoreData(){
+    $("#conformationModal").modal('show');
+  }
+
+  showData(){
+    console.log(this.bankName, this.productName);
+    
+    if(typeof this.bankName !== 'undefined' && typeof this.productName !== 'undefined' !){
+      console.log('trueee');
+      
+      this.showDiv = true;
+    }
   }
 
 }

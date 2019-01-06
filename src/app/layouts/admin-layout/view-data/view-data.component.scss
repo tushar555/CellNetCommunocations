@@ -20,9 +20,14 @@
 }
 
 .card-header-danger {
-    background: #686161 !important;
-    box-shadow: none !important;
+   // background: #686161 !important;
+    background: #fff !important; 
+   box-shadow: none !important;
     padding: 4px !important;
+}
+
+.thead-background{
+    background: #686161 !important;
 }
 
 ::placeholder {

@@ -33,6 +33,15 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
+                <div class="col-md-3">
+                  <mat-form-field class="example-full-width">
+                    <mat-select formControlName="fileType" placeholder="File Type">
+                      <mat-option *ngFor="let file of FileArray" [value]="file.value">
+                        {{file.Name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
                 <!-- <div class="col-md-4">
                   <mat-form-field class="example-full-width">
                     <input matInput placeholder="Email address" type="email">
