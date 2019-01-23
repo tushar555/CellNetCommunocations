@@ -93,7 +93,7 @@ export class UploadComponent implements OnInit {
 
   uploadCSV(event) {
     this.spinner.show();
-    let URL= '';
+    var URL= '';
     // this.showSearchData = true;
     let file = this.file;//event.srcElement.files[0];
     //let URL = Constant.uploadFile;

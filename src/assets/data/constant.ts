@@ -1,6 +1,6 @@
 export class Constant {
 
-    public static BASE_URL = 'https://cellnetcommunications.com/api/';
+    public static BASE_URL = 'http://cellnetcommunications.com/api/';
     public static LocalHost_Base_Url = 'assets/data/';
     
     // public static Login = Constant.LocalHost_Base_Url + 'userList.json';

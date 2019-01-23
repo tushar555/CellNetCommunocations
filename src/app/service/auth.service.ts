@@ -5,11 +5,10 @@ import { LocalStorageService } from "ngx-store/src/ngx-store";
 
 @Injectable()
 export class AuthService {
-
   constructor(public http: HttpClient, public localstorage: LocalStorageService) { }
 
 
-  doLogin(url, data) {
+  doLogin(url:any, data:any) {
     console.log('URL', url);
     console.log('data', data);
 
@@ -21,8 +20,7 @@ export class AuthService {
   doLogout() {
     this.localstorage.clear();
   }
-  loalDoLogin(url) {
-
+  loalDoLogin(url:any) {
     return this.http.get(url);
   }
 }
