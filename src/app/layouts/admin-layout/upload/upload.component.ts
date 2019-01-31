@@ -108,11 +108,8 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
 
     let data = Object.assign({}, this.formData);
     this.common.postDataService(URL, data).subscribe((resp) => {
-<<<<<<< HEAD
       console.log('RESP', resp);
       this.openDialog();
-=======
->>>>>>> 4c88cb180dd0d8222a9d6730771fc15c49704fe0
       this.spinner.hide();
     }, (error) => {
       console.log('Error', error);
