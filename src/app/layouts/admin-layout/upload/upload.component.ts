@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
-import * as XLSX from 'ts-xlsx';
+// import * as XLSX from 'ts-xlsx';
 import { CommonService } from "app/service/common.service";
 import { Constant } from "assets/data/constant";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RequestOptions } from '@angular/http';
+import { BasePopupCompoent } from '../base-popup.component';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss']
 })
-export class UploadComponent implements OnInit {
+export class UploadComponent extends BasePopupCompoent implements OnInit {
   formData: any;
   titleArray: any[];
   infoArray: any[];
@@ -29,8 +31,10 @@ export class UploadComponent implements OnInit {
   file: File;
   FileArray: any[];
 
-  constructor(public spinner: NgxSpinnerService, public formbuilder: FormBuilder, public common: CommonService) {
-
+  constructor(public spinner: NgxSpinnerService, public formbuilder: FormBuilder,
+               public common: CommonService,  public dialogRef: MatDialogRef<BasePopupCompoent>,
+               @Inject(MAT_DIALOG_DATA) public data:any, public dialog: MatDialog) {
+    super(dialogRef,MAT_DIALOG_DATA);
     this.initialForm = this.formbuilder.group({
       'bankName': ['', Validators.required],
       'productName': ['', Validators.required],
@@ -106,11 +110,24 @@ export class UploadComponent implements OnInit {
 
     this.common.postDataService(URL, data).subscribe((resp) => {
       console.log('RESP', resp);
+      this.openDialog();
       this.spinner.hide();
     }, (error) => {
       console.log('Error', error);
       this.spinner.hide();
     })
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(BasePopupCompoent, {
+      width: '250px',
+      // data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+     // this.animal = result;
+    });
   }
 
   selectFile(eve) {

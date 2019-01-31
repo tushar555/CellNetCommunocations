@@ -1,19 +1,16 @@
-<body>
-  <div class="loginbox">
+<div class="loginbox">
     <img src="assets/img/avatar.png" class="avatar">
     <h1>Login</h1>
     <form [formGroup]="loginForm">
-      <mat-form-field >
+       <mat-form-field >
         <input matInput placeholder="User Name" formControlName='userName'>
       </mat-form-field>
 
       <mat-form-field >
         <input type="password" matInput placeholder="password" formControlName='password'>
       </mat-form-field>
-     
+      
       <input [disabled]="!loginForm.valid" (click)="authlogin()" type="submit" name="" value="Login">
     </form>
     <!-- <a href="#">Lost your password?</a><br> -->
   </div>
-
-</body>

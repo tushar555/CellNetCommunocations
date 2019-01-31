@@ -34,8 +34,8 @@
           
             </div>
             
-            <div class="row" *ngIf="showDiv">
-            <div class="col-md-3" style=" padding-top: 4.4px;">
+            <div class="row advance_search" *ngIf="showDiv ">
+            <div class="col-md-3" style="padding-top: 4.4px;">
                 <input type="text" value="" class="form-control search" placeholder="Search">
                 <!-- <button mat-raised-button type="submit" class="search-btn btn btn-white btn-round btn-just-icon">
                       <i class="material-icons">search</i>
@@ -54,7 +54,7 @@
               <div class="col-md-3">
                 <!-- <h4 class="card-title mt-0"> Table</h4> -->
                 <mat-form-field style="width: 14rem;">
-                  <mat-select placeholder="Select">
+                  <mat-select  placeholder="Select Names">
                     <mat-option *ngFor="let option of optionsArray" [value]="option.id">
                       {{option.full_name}}
                     </mat-option>

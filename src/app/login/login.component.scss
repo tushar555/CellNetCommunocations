@@ -1,11 +1,4 @@
-body {
-    margin: 0;
-    padding: 0;
-    background-image: 'assets/img/pic1.jpg';
-    background-size: cover;
-    background-position: center;
-    font-family: sans-serif;
-}
+
 
 .loginbox {
     width: 357px;
@@ -37,27 +30,12 @@ h1 {
     font-size: 22px;
 }
 
-.loginbox p {
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
-}
 
 .loginbox input {
     width: 100%;
     margin-bottom: 20px;
 }
 
-.loginbox input[type="text"],
-input[type="password"] {
-    border: none;
-    border-bottom: 1px solid #fff;
-    background: transparent;
-    outline: none;
-    height: 40px;
-    color: #fff;
-    font-size: 16px;
-}
 
 .loginbox input[type="submit"] {
     width: 10rem;
@@ -79,15 +57,5 @@ input[type="password"] {
     color: #000
 }
 
-.mat-form-field-wrapper{
-    padding: 0 !important;
-}
-.loginbox a {
-    text-decoration: none;
-    font-size: 12px;
-    line-height: 20px; // color: darkgrey;
-}
 
-.loginbox a:hover {
-    // color: #ffc107;
-}
+
