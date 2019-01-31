@@ -24,7 +24,9 @@ import { EmpDashboardComponent } from './emp-dashboard/emp-dashboard.component';
 import { UploadComponent } from "./upload/upload.component";
 import { ViewDataComponent } from './view-data/view-data.component';
 import { EmpDetailsComponent } from './emp-details/emp-details.component';
-import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
+import {  FeedbackFormComponent } from './feedback-form/feedback-form.component';
+import { BasePopupCompoent } from './base-popup.component';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 
 @NgModule({
   imports: [
@@ -37,7 +39,8 @@ import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
     MatInputModule,
     MatTooltipModule,
     ComponentsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   declarations: [
     DashboardComponent,
@@ -53,8 +56,11 @@ import { FeedbackFormComponent } from './feedback-form/feedback-form.component';
     UploadComponent,
     ViewDataComponent,
     EmpDetailsComponent,
-    FeedbackFormComponent
-  ]
+    FeedbackFormComponent,
+    BasePopupCompoent
+  ],
+  entryComponents:[BasePopupCompoent],
+  providers:[{ provide: MatDialogRef, useValue: [] },{ provide: MAT_DIALOG_DATA, useValue: [] }] 
 })
 
 export class AdminLayoutModule { }

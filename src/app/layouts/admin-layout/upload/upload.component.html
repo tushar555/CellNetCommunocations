@@ -86,6 +86,7 @@
                   </mat-form-field>
                 </div>
               </div> -->
+                <button mat-raised-button type="submit" (click)="openDialog()">AAAA</button>
 
               <button mat-raised-button type="submit" [disabled]='!initialForm.valid  || !fileSelected || notCorrectFile' (click)="uploadCSV()"
                 class=" btn pull-right">Upload File</button>
