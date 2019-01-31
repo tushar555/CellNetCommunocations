@@ -97,20 +97,22 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
 
   uploadCSV(event) {
     this.spinner.show();
-    let URL= '';
+    var URL= '';
     // this.showSearchData = true;
     let file = this.file;//event.srcElement.files[0];
     //let URL = Constant.uploadFile;
-    if(this.formData.fileType === 'raw') 
+    if(this.initialForm.value.fileType === 'raw') 
         URL = Constant.uploadFile;
     else 
         URL = ''; 
 
     let data = Object.assign({}, this.formData);
-
     this.common.postDataService(URL, data).subscribe((resp) => {
+<<<<<<< HEAD
       console.log('RESP', resp);
       this.openDialog();
+=======
+>>>>>>> 4c88cb180dd0d8222a9d6730771fc15c49704fe0
       this.spinner.hide();
     }, (error) => {
       console.log('Error', error);
@@ -137,8 +139,8 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
     this.formData = new FormData();
    // this.formData.append('file',)
   // debugger;
-    this.formData.append('selectFile', this.file, this.file.name);
-
+   this.formData.append('selectFile', this.file, this.file.name);
+   this.formData.append('data', JSON.stringify(this.initialForm.value) )
 
     // let fileReader = new FileReader();
     // fileReader.onload = (e) => {
