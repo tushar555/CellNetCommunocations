@@ -102,7 +102,7 @@ export class UploadComponent implements OnInit {
     else 
         URL = ''; 
 
-    let data = Object.assign({}, this.formData);
+    let data = this.formData;
     this.common.postDataService(URL, data).subscribe((resp) => {
       this.spinner.hide();
     }, (error) => {
