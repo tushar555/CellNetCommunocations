@@ -1,4 +1,6 @@
+
 <div class="main-content">
+  
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -29,29 +31,34 @@
                 </mat-form-field>
               </div>
               <div class="col col-md-4">
-                  <button mat-raised-button type="submit"  class=" btn pull-right">Show Duplicate Data</button>
+                <mat-checkbox class="checkbox" (click)="advanceSearch()">Advance Search</mat-checkbox>
+                <button mat-raised-button type="submit" (click)="onSubmit()" [disabled]="isBtnDisabled" class="btn pull-right">Show Data</button>
                </div> 
           
             </div>
             
             <div class="row advance_search" *ngIf="showDiv ">
             <div class="col-md-3" style="padding-top: 4.4px;">
-                <input type="text" value="" class="form-control search" placeholder="Search">
+                <input type="text" value="" class="form-control" placeholder="Enter Acct no. or Client name...">
                 <!-- <button mat-raised-button type="submit" class="search-btn btn btn-white btn-round btn-just-icon">
                       <i class="material-icons">search</i>
                       <div class="ripple-container"></div>
                   </button> -->
               </div>
               <div class="col-md-3">
-                <mat-form-field style="width: 14rem;">
+                <div class="filter">
+                  <label> Filter By</label><br>
+                <mat-checkbox (click)="employeeCheck($event)">Employee names</mat-checkbox>
+<!-- 
                   <mat-select placeholder="Filter By" (selectionChange)="onChange($event.value)">
                     <mat-option *ngFor="let filter of filterArray" [value]="filter.value">
                       {{filter.property}}
                     </mat-option>
-                  </mat-select>
-                </mat-form-field>
+                  </mat-select> -->
+                </div>
               </div>
-              <div class="col-md-3">
+            
+              <div class="col-md-3" *ngIf="showEmployeeFilter">
                 <!-- <h4 class="card-title mt-0"> Table</h4> -->
                 <mat-form-field style="width: 14rem;">
                   <mat-select  placeholder="Select Names">
@@ -70,130 +77,49 @@
 
          
           <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-hover">
-                <thead class="thead-background"> 
-                  <th class="font-12-b">
-                    ID
-                  </th>
-                  <th>
-                    Name
-                  </th>
-                  <th>
-                    Country
-                  </th>
-                  <th>
-                    City
-                  </th>
-                  <th>
-                    Salary
-                  </th>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      1
-                    </td>
-                    <td>
-                      Dakota Rice
-                    </td>
-                    <td>
-                      Niger
-                    </td>
-                    <td>
-                      Oud-Turnhout
-                    </td>
-                    <td (click)="showMoreData()">
-                      $36,738
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      2
-                    </td>
-                    <td>
-                      Minerva Hooper
-                    </td>
-                    <td>
-                      Curaçao
-                    </td>
-                    <td>
-                      Sinaai-Waas
-                    </td>
-                    <td>
-                      $23,789
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      3
-                    </td>
-                    <td>
-                      Sage Rodriguez
-                    </td>
-                    <td>
-                      Netherlands
-                    </td>
-                    <td>
-                      Baileux
-                    </td>
-                    <td>
-                      $56,142
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      4
-                    </td>
-                    <td>
-                      Philip Chaney
-                    </td>
-                    <td>
-                      Korea, South
-                    </td>
-                    <td>
-                      Overland Park
-                    </td>
-                    <td>
-                      $38,735
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      5
-                    </td>
-                    <td>
-                      Doris Greene
-                    </td>
-                    <td>
-                      Malawi
-                    </td>
-                    <td>
-                      Feldkirchen in Kärnten
-                    </td>
-                    <td>
-                      $63,542
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      6
-                    </td>
-                    <td>
-                      Mason Porter
-                    </td>
-                    <td>
-                      Chile
-                    </td>
-                    <td>
-                      Gloucester
-                    </td>
-                    <td>
-                      $78,615
-                    </td>
-                  </tr>
-                </tbody>
+            <div class="mat-elevation-z8">
+              
+              <table mat-table [dataSource]="dataSource">
+            
+                <!-- Position Column -->
+                <ng-container matColumnDef="account">
+                  <th mat-header-cell *matHeaderCellDef> <b> Account Number </b> </th>
+                  <td mat-cell *matCellDef="let element"> {{element.account}} </td>
+                </ng-container>
+            
+                <!-- Name Column -->
+                <ng-container matColumnDef="full_name">
+                  <th mat-header-cell *matHeaderCellDef> <b> Name </b> </th>
+                  <td mat-cell *matCellDef="let element"> {{element.full_name}} </td>
+                </ng-container>
+            
+                <!-- Weight Column -->
+                <ng-container matColumnDef="msd_cur_bal">
+                  <th mat-header-cell *matHeaderCellDef>  <b> MSD Current balance </b> </th>
+                  <td mat-cell *matCellDef="let element"> {{element.msd_cur_bal}} </td>
+                </ng-container>
+            
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="principle_bal">
+                  <th mat-header-cell *matHeaderCellDef> <b> Principle balance </b> </th>
+                  <td mat-cell *matCellDef="let element"> {{element.principle_bal}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="DPD">
+                  <th mat-header-cell *matHeaderCellDef> <b> DPD </b> </th>
+                  <td mat-cell *matCellDef="let element"> {{element.DPD}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="Action">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let element" (click)="openBottomSheet(element)" > <b> View more </b>  </td>
+                </ng-container> 
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
+            
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
             </div>
           </div>
         </div>
@@ -220,3 +146,4 @@
       </div>
     </div>
   </div>
+ 

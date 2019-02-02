@@ -15,6 +15,7 @@ import { UploadComponent } from '../admin-layout/upload/upload.component';
 import { ViewDataComponent } from '../admin-layout/view-data/view-data.component'
 import { EmpDetailsComponent } from "app/layouts/admin-layout/emp-details/emp-details.component";
 import { FeedbackFormComponent } from '../admin-layout/feedback-form/feedback-form.component'
+import { DuplicateDataComponent } from './duplicate-data/duplicate-data.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -128,6 +129,12 @@ export const AdminLayoutRoutes: Routes = [
                 path: 'view-data',
                 canActivateChild: [AuthGuard],
                 component: ViewDataComponent,
+                data: { roles: ['admin'] }
+            },
+            {
+                path: 'view-duplicate-data',
+                canActivateChild: [AuthGuard],
+                component: DuplicateDataComponent,
                 data: { roles: ['admin'] }
             },
             {

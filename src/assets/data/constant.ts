@@ -15,4 +15,6 @@ export class Constant {
 
     public static uploadFile = Constant.BASE_URL + 'importDataIcici.php';
 
+    public static showData = Constant.BASE_URL+ 'showData.php'
+
 }

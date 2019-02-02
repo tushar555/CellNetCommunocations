@@ -3,14 +3,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 
 @Component({
-    template:`<h1 mat-dialog-title>Hi {{data.name}}</h1>
+    template:`
     <div mat-dialog-content>
-      <p>What's your favorite animal?</p>
+      <p>Your Data has been uploded.</p>
      
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="onNoClick()">No Thanks</button>
-      <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Show Data</button>
+      <button mat-button mat-dialog-close="show_data" cdkFocusInitial>Show Data</button>
     </div>
     `,
     selector:`<base-popup></base-popup>`

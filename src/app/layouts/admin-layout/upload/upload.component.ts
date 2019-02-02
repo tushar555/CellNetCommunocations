@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { RequestOptions } from '@angular/http';
 import { BasePopupCompoent } from '../base-popup.component';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload',
@@ -33,7 +34,7 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
 
   constructor(public spinner: NgxSpinnerService, public formbuilder: FormBuilder,
                public common: CommonService,  public dialogRef: MatDialogRef<BasePopupCompoent>,
-               @Inject(MAT_DIALOG_DATA) public data:any, public dialog: MatDialog) {
+               @Inject(MAT_DIALOG_DATA) public data:any, public dialog: MatDialog, public route:Router) {
     super(dialogRef,MAT_DIALOG_DATA);
     this.initialForm = this.formbuilder.group({
       'bankName': ['', Validators.required],
@@ -106,9 +107,9 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
     else 
         URL = ''; 
 
-    let data = Object.assign({}, this.formData);
+    let data =this.formData;
     this.common.postDataService(URL, data).subscribe((resp) => {
-      console.log('RESP', resp);
+   
       this.openDialog();
       this.spinner.hide();
     }, (error) => {
@@ -124,7 +125,10 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The dialog was closed', result);
+      if(result=='show_data'){
+        this.route.navigate(['/cellnet/view-data'])
+      }
      // this.animal = result;
     });
   }

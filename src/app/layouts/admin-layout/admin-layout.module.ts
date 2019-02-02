@@ -16,7 +16,9 @@ import {
   MatInputModule,
   MatRippleModule,
   MatTooltipModule,
-  MatSelectModule
+  MatSelectModule,
+  MatListModule,
+  MatCheckboxModule
 } from '@angular/material';
 import { ComponentsModule } from '../../components/components.module';
 import { AdminLayoutComponent } from './admin-layout.component';
@@ -27,6 +29,11 @@ import { EmpDetailsComponent } from './emp-details/emp-details.component';
 import {  FeedbackFormComponent } from './feedback-form/feedback-form.component';
 import { BasePopupCompoent } from './base-popup.component';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material';
+import { DuplicateDataComponent } from './duplicate-data/duplicate-data.component'
+import { BaseModalCompoent } from './base-modal.component';
+import { MatBottomSheetModule, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 
 @NgModule({
   imports: [
@@ -40,7 +47,12 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
     MatTooltipModule,
     ComponentsModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatBottomSheetModule,
+    MatListModule,
+    MatCheckboxModule
   ],
   declarations: [
     DashboardComponent,
@@ -57,10 +69,16 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
     ViewDataComponent,
     EmpDetailsComponent,
     FeedbackFormComponent,
-    BasePopupCompoent
+    BasePopupCompoent,
+    DuplicateDataComponent,
+    BaseModalCompoent
+ 
   ],
-  entryComponents:[BasePopupCompoent],
-  providers:[{ provide: MatDialogRef, useValue: [] },{ provide: MAT_DIALOG_DATA, useValue: [] }] 
+  entryComponents:[BasePopupCompoent, BaseModalCompoent],
+  providers:[{ provide: MatDialogRef, useValue: [] },
+             { provide: MAT_DIALOG_DATA, useValue: [] },
+             { provide: MatBottomSheetRef, useValue: [] },
+             { provide: MAT_BOTTOM_SHEET_DATA, useValue: [] }] 
 })
 
 export class AdminLayoutModule { }

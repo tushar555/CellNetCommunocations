@@ -18,6 +18,12 @@
             "class": ""
         },
         {
+            "path": "/cellnet/view-duplicate-data",
+            "title": "Show Duplicate Data",
+            "icon": "pageview",
+            "class": ""
+        },
+        {
             "path": "/cellnet/emp-details",
             "title": "Add/Delete Employee",
             "icon": "border_color",

@@ -4,11 +4,21 @@
     padding: 5px 0px 0px 18px !important;
 }
 
+.pull-right{
+    margin: 3% 5% 4% !important;
+}
 .advance_search{
     .search{
         width: 13rem;
     }
 }
+
+
+.checkbox{
+    position: absolute;
+    margin: 6% 0% 0% 5% !important;
+}
+
 .table thead th{
     color: #fff 
 }
@@ -38,9 +48,10 @@
     background: #686161 !important;
 }
 
-::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #fff;
-    opacity: 1;
-    /* Firefox */
+.filter{
+    margin: -6% 10% -9% 14% !important;
 }
+
+table {
+    width: 100%;
+  }

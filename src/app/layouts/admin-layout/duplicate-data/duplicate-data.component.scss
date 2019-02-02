@@ -1,0 +1,50 @@
+.card [class*="card-header-"]:not(.card-header-icon):not(.card-header-text):not(.card-header-image) {
+    border-radius: 3px !important;
+    margin-top: -63px !important;
+    padding: 5px 0px 0px 18px !important;
+}
+
+.advance_search{
+    .search{
+        width: 13rem;
+    }
+}
+.table thead th{
+    color: #fff 
+}
+.search {
+    width: 20rem;
+    display: inline;
+    position: relative; //left: 37rem;
+}
+
+.search-btn {
+    position: relative; // left: 37rem;
+    // width: 12px;
+}
+
+.card-title {
+    display: inline !important;
+}
+
+.card-header-danger {
+   // background: #686161 !important;
+    background: #fff !important; 
+   box-shadow: none !important;
+    padding: 4px !important;
+}
+
+.thead-background{
+    background: #686161 !important;
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #fff;
+    opacity: 1;
+    /* Firefox */
+}
+
+table {
+    width: 100%;
+  }
