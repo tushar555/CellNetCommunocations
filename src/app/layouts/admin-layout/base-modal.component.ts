@@ -9,13 +9,13 @@ import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
           <div class="col col-md-6">
               <a mat-list-item >
                 <span mat-line>Account No.</span>
-                <span mat-line>{{data.account}}</span>
+                <span mat-line>{{data.ACCT}}</span>
               </a>
             </div>   
           <div class="col col-md-6">
               <a mat-list-item >
                 <span mat-line>Name.</span>
-                <span mat-line>{{data.full_name}}</span>
+                <span mat-line>{{data.FULL_NAME}}</span>
               </a> 
           </div>
         </div>
@@ -23,13 +23,13 @@ import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
             <div class="col col-md-6">
                 <a mat-list-item >
                   <span mat-line> MSD Current balance</span>
-                  <span mat-line>{{data.msd_cur_bal}}</span>
+                  <span mat-line>{{data.MSD_CURR_BAL}}</span>
                 </a>
             </div>   
             <div class="col col-md-6">
                 <a mat-list-item >
                   <span mat-line> PRINCIPAL BALANCE</span>
-                  <span mat-line>{{data.principle_bal}}</span>
+                  <span mat-line>{{data.PRINCIPAL_BALANCE}}</span>
                 </a> 
             </div>
         </div>
@@ -42,8 +42,8 @@ import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
             </div>
             <div class="col col-md-6">
             <a mat-list-item >
-              <span mat-line> PRINCIPAL BALANCE</span>
-              <span mat-line>{{data.principle_bal}}</span>
+              <span mat-line>LOGO DESCRIPTION</span>
+              <span mat-line>{{data.LOGO_DESCRIPTION}}</span>
             </a>
         </div>   
         </div>

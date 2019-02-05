@@ -17,4 +17,6 @@ export class Constant {
 
     public static showData = Constant.BASE_URL+ 'showData.php'
 
+    public static showDetailData= Constant.BASE_URL+ 'showDetailData.php'
+
 }

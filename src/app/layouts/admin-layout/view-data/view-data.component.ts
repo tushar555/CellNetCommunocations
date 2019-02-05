@@ -37,13 +37,14 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
 
   isBtnDisabled: boolean = true;
 
-  displayedColumns: string[] = ['account', 'full_name', 'msd_cur_bal', 'principle_bal', 'DPD', 'Action'];
-  dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
+  displayedColumns: string[];
+  dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   showEmployeeFilter: boolean = false;
   pageNo: any = 1;
- 
+  pageArray=[0];
+  updatedFlag: any;
   constructor(public bottomSheetRef: MatBottomSheetRef<BaseModalCompoent>,
             public common: CommonService, public spinner: NgxSpinnerService,
              private bottomSheet: MatBottomSheet, @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
@@ -103,11 +104,19 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
 
   
   openBottomSheet(element): void {
+    this.spinner.show();
     console.log('element', element);
-    
+    let URL= Constant.showDetailData;
+    let data = {"id":element.id}
+    this.common.postDataService(URL, data).subscribe((resp:any)=>{
+      console.log(resp);
+
+      this.spinner.hide();1111
+      
     this.bottomSheet.open(BaseModalCompoent, {
-      data: element,
+      data: resp.data,
     });
+    })
   }
   onChange(event) {
     console.log('Event', event);
@@ -126,25 +135,45 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
     $("#conformationModal").modal('show');
   }
 
-  onSubmit(){
+  onSubmit(flag){
+    this.updatedFlag = flag;
+    this.spinner.show();
     let URL = Constant.showData;
     let data = {
       'bank':this.bankName,
       'loanType':this.productName,
       'limit':this.pageNo,
       'search':'',
-      'duplicate':''
+      'duplicate': this.updatedFlag
   }
-    console.log('AAAA',data);
-    console.log('URL',URL);
-    
-    this.common.postDataService(URL, data).subscribe((result:any)=>{
-      console.log(result);
+console.log(data);
+
+   this.common.postDataService(URL, data).subscribe((result:any)=>{
+      console.log("aaaaaa",Math.floor(result.count/100) );
       
+      let keyArray= [];
+       Object.keys(result.data[1]).forEach((key)=>{
+        if( key !=='count' )
+          keyArray.push(key)
+       })
+       keyArray.push("Action")
+       console.log(this.dataSource.data);
+       
+       this.displayedColumns = keyArray;
+       this.dataSource =result.data; 
+       console.log(this.dataSource.data);
+
+       this.pageArray = Array.from(Array(Math.floor(result.count/100)), (_,i) => i+1);
+       this.spinner.hide();
     })
   }
 
 
+  getUpdate(event){
+    console.log('EEE',event.pageSize);
+    this.pageNo = event.pageSize;
+    this.onSubmit( this.updatedFlag);
+  }
   advanceSearch(){
     this.showDiv=!this.showDiv;
   }

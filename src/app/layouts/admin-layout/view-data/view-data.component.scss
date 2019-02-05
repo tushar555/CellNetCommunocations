@@ -7,6 +7,13 @@
 .pull-right{
     margin: 3% 5% 4% !important;
 }
+.pull-right1{
+    margin: 16px 1px 7px 137px !important;
+    position: absolute !important;
+    
+}
+
+
 .advance_search{
     .search{
         width: 13rem;
@@ -16,7 +23,7 @@
 
 .checkbox{
     position: absolute;
-    margin: 6% 0% 0% 5% !important;
+    top: 21px;
 }
 
 .table thead th{
@@ -54,4 +61,10 @@
 
 table {
     width: 100%;
+  }
+
+  .table-container{
+    margin-top: 10px;
+    max-height: 450px;
+    overflow: auto;
   }

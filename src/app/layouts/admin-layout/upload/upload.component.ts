@@ -143,43 +143,6 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
    this.formData.append('selectFile', this.file, this.file.name);
    this.formData.append('data', JSON.stringify(this.initialForm.value) )
 
-    // let fileReader = new FileReader();
-    // fileReader.onload = (e) => {
-    //   this.arrayBuffer = fileReader.result;
-    //   var data = new Uint8Array(this.arrayBuffer);
-    //   var arr = new Array();
-    //   for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-    //   var bstr = arr.join("");
-    //   var workbook = XLSX.read(bstr, { type: "binary" });
-    //   var first_sheet_name = workbook.SheetNames[0];
-    //   var worksheet = workbook.Sheets[first_sheet_name];
-    //   let j = 0;
-    //   this.titleArray = [];
-    //   this.infoArray = [];
-    //   //console.log(worksheet);
-    //   for (var key in worksheet) {
-    //     // if (j >= 120 && j !== 0) {
-    //     //   this.infoArray.push(worksheet[key]);
-    //     // } else if (j !== 0) {
-    //     //   this.titleArray.push(worksheet[key]);
-    //     // }
-    //     // j++
-
-    //     console.log('WorkSheet', worksheet[key]);
-    //     j++
-    //   }
-    //   console.log(j);
-
-    //   // for (let p = 0; this.titleArray.length - this.infoArray.length; p++) {
-    //   //   this.infoArray.push({ v: "" })
-    //   // }
-    //   console.log('Title', this.titleArray);
-    //   console.log('extraData', this.infoArray);
-
-    // }
-
-    // fileReader.readAsArrayBuffer(this.file);
-    //  console.log('JJJJJ', fileReader.readAsArrayBuffer(this.file));
 
     if (eve.target.files[0].name.split('.').pop() != 'xlsx' && eve.target.files[0].name.split('.').pop() != 'xls' && eve.target.files[0].name.split('.').pop() != 'csv') {
       this.notCorrectFile = true;
