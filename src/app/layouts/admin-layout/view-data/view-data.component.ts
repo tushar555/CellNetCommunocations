@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 import {MatPaginator, MatTableDataSource, MatBottomSheet, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from '@angular/material';
 import { BaseModalCompoent } from '../base-modal.component';
+import { ExportToCsv } from 'export-to-csv';
 
 declare var jquery: any;
 declare var $: any;
@@ -44,7 +45,20 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
   showEmployeeFilter: boolean = false;
   pageNo: any = 1;
   pageArray=[0];
-  updatedFlag: any;
+  selectedFlag: any;
+  detailedArray: any;
+  options = { 
+    fieldSeparator: ',',
+    quoteStrings: '"',
+    decimalSeparator: '.',
+    showLabels: true, 
+    showTitle: true,
+    title: 'My Awesome CSV',
+    useTextFile: false,
+    useBom: true,
+    useKeysAsHeaders: true,
+    // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
+  };
   constructor(public bottomSheetRef: MatBottomSheetRef<BaseModalCompoent>,
             public common: CommonService, public spinner: NgxSpinnerService,
              private bottomSheet: MatBottomSheet, @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
@@ -111,7 +125,7 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
     this.common.postDataService(URL, data).subscribe((resp:any)=>{
       console.log(resp);
 
-      this.spinner.hide();1111
+      this.spinner.hide();
       
     this.bottomSheet.open(BaseModalCompoent, {
       data: resp.data,
@@ -136,7 +150,7 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
   }
 
   onSubmit(flag){
-    this.updatedFlag = flag;
+    
     this.spinner.show();
     let URL = Constant.showData;
     let data = {
@@ -144,35 +158,62 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
       'loanType':this.productName,
       'limit':this.pageNo,
       'search':'',
-      'duplicate': this.updatedFlag
+      'duplicate':''
   }
-console.log(data);
 
+  this.selectedFlag = flag;
    this.common.postDataService(URL, data).subscribe((result:any)=>{
-      console.log("aaaaaa",Math.floor(result.count/100) );
-      
-      let keyArray= [];
-       Object.keys(result.data[1]).forEach((key)=>{
-        if( key !=='count' )
-          keyArray.push(key)
-       })
-       keyArray.push("Action")
-       console.log(this.dataSource.data);
-       
-       this.displayedColumns = keyArray;
-       this.dataSource =result.data; 
-       console.log(this.dataSource.data);
+    console.log('FLAG', flag);
+    this.detailedArray = result.data
+    let keyArray= [];
+    Object.keys(result.data[1]).forEach((key)=>{
+     if( flag !== '')
+       keyArray.push(key)
+     else if(key !=='count'){
+       keyArray.push(key) 
+     }
+        
+    })
+    keyArray.push("Action")
+   
+    this.displayedColumns = keyArray;
 
-       this.pageArray = Array.from(Array(Math.floor(result.count/100)), (_,i) => i+1);
+      if( flag == 'duplicate')
+         this.onDuplicateClick(result);
+      else
+         this.onShowDataClick(result);     
+
        this.spinner.hide();
     })
   }
 
+  onShowDataClick(result){
+    this.dataSource =result.data; 
+    console.log('LLLL', this.dataSource);
+    
+    this.pageArray = Array.from(Array(Math.floor(result.count/100)), (_,i) => i+1);
+  }
+
+  onDuplicateClick(result){
+    console.log(result.data);
+    let newArray = result.data.filter(obj=>obj.count>0);
+   
+    this.dataSource =newArray; 
+    this.pageArray = Array.from(Array(Math.floor(result.count/100)), (_,i) => i+1);
+
+  }
+
+  exportCSV(){
+    debugger;
+    const csvExporter = new ExportToCsv(this.options);
+
+    csvExporter.generateCsv(this.detailedArray);
+  }
 
   getUpdate(event){
     console.log('EEE',event.pageSize);
     this.pageNo = event.pageSize;
-    this.onSubmit( this.updatedFlag);
+    this.onSubmit( this.selectedFlag);
   }
   advanceSearch(){
     this.showDiv=!this.showDiv;

@@ -13,7 +13,7 @@
                 <!-- <h4 class="card-title mt-0"> Table</h4> -->
                 
                 <mat-form-field class="example-full-width">
-                  <mat-select [(ngModel)]="bankName" placeholder="Bank Name"  (selectionChange)="showData($event.value)">
+                  <mat-select [(ngModel)]="bankName" placeholder="Bank Name"  (selectionChange)="showData()">
                     <mat-option *ngFor="let bank of BankNameArray" [value]="bank.value">
                       {{bank.Name}}
                     </mat-option>
@@ -23,17 +23,18 @@
               </div>
               <div class="col col-md-3">
                 <mat-form-field class="example-full-width">
-                  <mat-select [(ngModel)]="productName" placeholder="Product Name"  (selectionChange)="showData($event.value)">
+                  <mat-select [(ngModel)]="productName" placeholder="Product Name"  (selectionChange)="showData()">
                     <mat-option *ngFor="let pr of ProductArray" [value]="pr.value">
                       {{pr.Name}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div class="col col-md-6">
+              <div class="col col-md-6 btn-section ">
                 <mat-checkbox class="checkbox" (click)="advanceSearch()">Advance Search</mat-checkbox>
-                <button mat-raised-button type="submit" (click)="onSubmit(1)"  class="btn pull-right">Show Duplicate Data</button>
-                <button mat-raised-button type="submit" (click)="onSubmit('')" [disabled]="isBtnDisabled"  class="btn pull-right1">Show Data</button>
+                <button mat-raised-button type="submit" (click)="onSubmit('duplicate')"   [disabled]="isBtnDisabled" class="btn pull-right">Search Duplicate</button>
+                <button mat-raised-button type="submit" (click)="onSubmit('')" [disabled]="isBtnDisabled"  class="btn pull-right1">Search</button>
+                <img class="download-btn"  (click)="exportCSV()"  src='assets/img/downloading-file.png'>
                
               </div> 
           
@@ -115,7 +116,12 @@
                   <th mat-header-cell *matHeaderCellDef> <b> DPD </b> </th>
                   <td mat-cell *matCellDef="let element"> {{element.DPD}} </td>
                 </ng-container>
-            
+
+                <ng-container matColumnDef="count">
+                  <th mat-header-cell *matHeaderCellDef> <b> Repeat count </b> </th>
+                  <td mat-cell *matCellDef="let element"> {{element.count}} </td>
+                </ng-container>
+                
                  <ng-container matColumnDef="Action">
                   <th mat-header-cell *matHeaderCellDef><b>Action</b> </th>
                   <td mat-cell *matCellDef="let element" (click)="openBottomSheet(element)" > <b> View more </b>  </td>
@@ -142,7 +148,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Declaration {{actionType}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Declaration</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -152,7 +158,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-deny" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-yes" data-dismiss="modal" (click)="adminApproveReject()">Yes</button>
+        <button type="button" class="btn btn-yes" data-dismiss="modal">Yes</button>
       </div>
     </div>
   </div>

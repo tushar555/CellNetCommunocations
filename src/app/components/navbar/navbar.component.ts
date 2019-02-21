@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     role: any;
-    private searchText:string = '';
+    public searchText:string = '';
 
     constructor(public localstorage: LocalStorageService, public common: CommonService, location: Location, private element: ElementRef, private router: Router,
         public auth: AuthService) {

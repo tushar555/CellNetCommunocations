@@ -41,5 +41,8 @@ export class FeedbackFormComponent implements OnInit {
     this.EmpType = this.localstorage.get('userDetails').role;
     
   }
+  submitForm(){
+    
+  }
   
 }

@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
      
     </div>
     <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">No Thanks</button>
+      <button mat-button (click)="onNoClick()">OK</button>
       <button mat-button mat-dialog-close="show_data" cdkFocusInitial>Show Data</button>
     </div>
     `,
