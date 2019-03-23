@@ -31,7 +31,9 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
   arrayBuffer: any;
   file: File;
   FileArray: any[];
-
+  MonthArray:any [];
+  YearArray: any[];
+  date = new Date();
   constructor(public spinner: NgxSpinnerService, public formbuilder: FormBuilder,
                public common: CommonService,  public dialogRef: MatDialogRef<BasePopupCompoent>,
                @Inject(MAT_DIALOG_DATA) public data:any, public dialog: MatDialog, public route:Router) {
@@ -39,7 +41,9 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
     this.initialForm = this.formbuilder.group({
       'bankName': ['', Validators.required],
       'productName': ['', Validators.required],
-      'fileType':['', Validators.required]
+      'fileType':['', Validators.required],
+      'month':['',Validators.required],
+      'year':['',Validators.required]
     })
     this.BankNameArray = [
       {
@@ -90,9 +94,33 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
         'value': 'allocation'
       } 
     ]
+    this.createYearArray();
+
+    this.createMonthsArray();
+ 
+  }
+
+  createMonthsArray(){
+    this.MonthArray = ['January', 'February', 'March', 'April', 'March', 'May', 'June', 'July', 'Augast', 'September', 'October', 'November', 'December' ]
 
   }
 
+  getMonths(year){
+    debugger;
+ 
+    this.createMonthsArray();
+    if(year.value == this.date.getFullYear())
+      this.MonthArray = this.MonthArray.splice(0,this.date.getMonth()+1); 
+  }
+  createYearArray(){
+   let temp = [];
+   for(let i=2010; i<= this.date.getFullYear();i++){
+    temp.push(i);  
+    // this.YearArray.push(i);
+    //this.YearArray.push(i);
+   } 
+   this.YearArray = temp;
+  }
   ngOnInit() {
   }
 
@@ -108,6 +136,8 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
         URL = ''; 
 
     let data =this.formData;
+    console.log('THISSS', JSON.stringify(JSON.stringify(this.initialForm.value)));
+    
     this.common.postDataService(URL, data).subscribe((resp) => {
    
       this.openDialog();
@@ -142,8 +172,7 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
   // debugger;
    this.formData.append('selectFile', this.file, this.file.name);
    this.formData.append('data', JSON.stringify(this.initialForm.value) )
-
-
+  
     if (eve.target.files[0].name.split('.').pop() != 'xlsx' && eve.target.files[0].name.split('.').pop() != 'xls' && eve.target.files[0].name.split('.').pop() != 'csv') {
       this.notCorrectFile = true;
     } else {

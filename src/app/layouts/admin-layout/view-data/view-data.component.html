@@ -27,18 +27,19 @@
                   </mat-select>
                 </mat-form-field>
               </div>
+            
               <div class="col-md-2" style="padding-top:15px">
                   <mat-checkbox (click)="advanceSearch()">Advance Search</mat-checkbox>
               </div>
               <div class="col-md-2" style="padding-top:5px">
-                  <button class="btn btn-primary btn-sm" type="submit" (click)="onSubmit('duplicate')" [disabled]="isBtnDisabled"
+                  <button  [disabled]='!bankName || !productName'  class="btn btn-primary btn-sm" type="submit" (click)="onSubmit('duplicate')" [disabled]="isBtnDisabled"
                   >Search Duplicate</button>
               </div>
               <div class="col-md-1" style="padding-top:5px">
-                  <button class="btn btn-primary btn-sm" type="submit" (click)="onSubmit('')" [disabled]="isBtnDisabled"
+                  <button [disabled]='!bankName || !productName' class="btn btn-primary btn-sm" type="submit" (click)="onSubmit('')" [disabled]="isBtnDisabled"
                   >Search</button>
               </div>
-              <div class="col-md-1" style="padding-top:8px;float: right">
+              <div *ngIf="bankName && productName" class="col-md-1" style="padding-top:8px;float: right">
                 &nbsp;&nbsp;&nbsp;
                <img style="height:30px;width:30px" (click)="exportCSV()" src='assets/img/downloading-file.png'>
               </div>
@@ -49,13 +50,20 @@
             <div class="row advance_search" *ngIf="showDiv ">
                
               <div class="col-md-3" style="padding-top: 15px;">
-                <input type="text" value="" class="form-control" placeholder="Enter Acct no. or Client name...">
+                <input type="text" value="" class="form-control" placeholder="Enter Acct no. or CC NO.">
                 <!-- <button mat-raised-button type="submit" class="search-btn btn btn-white btn-round btn-just-icon">
                       <i class="material-icons">search</i>
                       <div class="ripple-container"></div>
                   </button> -->
               </div>
-              <div class="col-md-3" style="padding-top: 22px;">
+              <div class="col-md-4" style="padding-top: 15px;">
+                <input type="text" value="" class="form-control" placeholder="Enter Client name or Mobile No or email">
+                <!-- <button mat-raised-button type="submit" class="search-btn btn btn-white btn-round btn-just-icon">
+                      <i class="material-icons">search</i>
+                      <div class="ripple-container"></div>
+                  </button> -->
+              </div>
+              <!-- <div class="col-md-3" style="padding-top: 22px;">
                 <div class="filter">
                   <label> Filter By</label> &nbsp;&nbsp;&nbsp;
                   <mat-checkbox (click)="employeeCheck($event)">Employee names</mat-checkbox>
@@ -64,14 +72,14 @@
                     <mat-option *ngFor="let filter of filterArray" [value]="filter.value">
                       {{filter.property}}
                     </mat-option>
-                  </mat-select> -->
+                  </mat-select> 
                 </div>
-              </div>
+              </div> -->
 
               <div class="col-md-3" *ngIf="showEmployeeFilter" style="padding-top: 15px;">
                 <!-- <h4 class="card-title mt-0"> Table</h4> -->
                 <mat-form-field style="width: 14rem;">
-                  <mat-select placeholder="Select Names">
+                  <mat-select placeholder="Select Employee Names">
                     <mat-option *ngFor="let option of optionsArray" [value]="option.id">
                       {{option.full_name}}
                     </mat-option>
@@ -86,7 +94,7 @@
           </div>
 
 
-          <div class="card-body" *ngIf='this.dataSource.data ===undefined; else Nofilter'>
+          <div class="card-body" *ngIf='this.dataSource.data ===undefined'>
             <div class="mat-elevation-z8 table-container">
 
               <table mat-table [dataSource]="dataSource">
@@ -149,9 +157,9 @@
 </div>
 
 
-<ng-template #Nofilter>
+<!-- <ng-template  #Nofilter>
   <span style="color:red; margin-top: 1rem;">*Please Select Bank name and product name </span>
-</ng-template>
+</ng-template> -->
 
 <div class="modal fade" id="conformationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">

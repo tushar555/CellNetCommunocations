@@ -1,7 +1,7 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row" *ngIf='!showSearchData'>
-      <div class="col-md-8">
+      <div class="col-md-12">
         <div class="card card-file">
           <div class="card-header card-header-danger">
             <h4 class="card-title">Upload CSV file Here</h4>
@@ -10,7 +10,7 @@
           <div class="card-body">
             <form [formGroup]="initialForm">
               <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-2">
                   <!-- <h4>Basic native select</h4> -->
                   <mat-form-field class="example-full-width">
                     <mat-select formControlName="bankName" placeholder="Bank Name">
@@ -24,7 +24,7 @@
                     <input matInput placeholder="Company (disabled)" disabled>
                   </mat-form-field> -->
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <mat-form-field class="example-full-width">
                     <mat-select formControlName="productName" placeholder="Product Name">
                       <mat-option *ngFor="let pr of ProductArray" [value]="pr.value">
@@ -33,7 +33,7 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <mat-form-field class="example-full-width">
                     <mat-select formControlName="fileType" placeholder="File Type">
                       <mat-option *ngFor="let file of FileArray" [value]="file.value">
@@ -42,6 +42,25 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
+                <div class="col-md-2">
+                  <mat-form-field class="example-full-width">
+                    <mat-select formControlName="year" (selectionChange)="getMonths($event)" placeholder="Select Year">
+                      <mat-option *ngFor="let year of YearArray"    [value]="year">
+                        {{year}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                  <mat-form-field class="example-full-width">
+                    <mat-select formControlName="month"  placeholder="Select Month">
+                      <mat-option *ngFor="let month of MonthArray;let i = index" [value]="i">
+                        {{month}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                
                 <!-- <div class="col-md-4">
                   <mat-form-field class="example-full-width">
                     <input matInput placeholder="Email address" type="email">
@@ -86,7 +105,7 @@
                   </mat-form-field>
                 </div>
               </div> -->
-                <button mat-raised-button type="submit" (click)="openDialog()">AAAA</button>
+                <!-- <button mat-raised-button type="submit" (click)="openDialog()">AAAA</button> -->
 
               <button mat-raised-button type="submit" [disabled]='!initialForm.valid  || !fileSelected || notCorrectFile' (click)="uploadCSV()"
                 class=" btn pull-right">Upload File</button>

@@ -163,25 +163,31 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
 
   this.selectedFlag = flag;
    this.common.postDataService(URL, data).subscribe((result:any)=>{
-    console.log('FLAG', flag);
-    this.detailedArray = result.data
-    let keyArray= [];
-    Object.keys(result.data[1]).forEach((key)=>{
-     if( flag !== '')
-       keyArray.push(key)
-     else if(key !=='count'){
-       keyArray.push(key) 
-     }
-        
-    })
-    keyArray.push("Action")
-   
-    this.displayedColumns = keyArray;
-
-      if( flag == 'duplicate')
-         this.onDuplicateClick(result);
-      else
-         this.onShowDataClick(result);     
+    console.log('FLAG', result);
+    if(result.data.length===0){
+      this.common.showSnackbar({ 'status': 'No Record Found!' })
+     
+    }else{
+      this.detailedArray = result.data
+      let keyArray= [];
+      Object.keys(result.data[1]).forEach((key)=>{
+       if( flag !== '')
+         keyArray.push(key)
+       else if(key !=='count'){
+         keyArray.push(key) 
+       }
+          
+      })
+      keyArray.push("Action")
+     
+      this.displayedColumns = keyArray;
+  
+        if( flag == 'duplicate')
+           this.onDuplicateClick(result);
+        else
+           this.onShowDataClick(result);     
+  
+    }
 
        this.spinner.hide();
     })
@@ -204,10 +210,15 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
   }
 
   exportCSV(){
-    debugger;
-    const csvExporter = new ExportToCsv(this.options);
+    if(this.detailedArray){
+      const csvExporter = new ExportToCsv(this.options);
 
-    csvExporter.generateCsv(this.detailedArray);
+      csvExporter.generateCsv(this.detailedArray);
+    }else{
+      this.common.showSnackbar({ 'status': 'No Record Found!' })
+
+    }
+
   }
 
   getUpdate(event){
@@ -217,21 +228,17 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
   }
   advanceSearch(){
     this.showDiv=!this.showDiv;
-  }
-
-
-  employeeCheck(ev){
-    console.log(ev);
-    
-     this.showEmployeeFilter = !this.showEmployeeFilter;
+    this.showEmployeeFilter = !this.showEmployeeFilter;
     if (this.optionsArray.length === 0) {
       let URL = Constant.getEmpDetails;
       this.common.getData(URL).subscribe((resp: any) => {
         this.optionsArray = resp.response.filter(obj => obj.role !== 'admin');
       });
     }
-
   }
+
+
+ 
   showData(){
     console.log(this.bankName, this.productName);
     
