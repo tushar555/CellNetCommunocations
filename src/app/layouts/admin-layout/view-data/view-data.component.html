@@ -79,7 +79,7 @@
               <div class="col-md-3" *ngIf="showEmployeeFilter" style="padding-top: 15px;">
                 <!-- <h4 class="card-title mt-0"> Table</h4> -->
                 <mat-form-field style="width: 14rem;">
-                  <mat-select placeholder="Select Employee Names">
+                  <mat-select [(ngModel)]="empName" placeholder="Select Employee Names">
                     <mat-option *ngFor="let option of optionsArray" [value]="option.id">
                       {{option.full_name}}
                     </mat-option>

@@ -106,11 +106,11 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
   }
 
   getMonths(year){
-    debugger;
- 
+  
     this.createMonthsArray();
-    if(year.value == this.date.getFullYear())
-      this.MonthArray = this.MonthArray.splice(0,this.date.getMonth()+1); 
+    if(year.value == this.date.getFullYear()) {
+      this.MonthArray = this.MonthArray.splice(0,this.date.getMonth()+1);
+    } 
   }
   createYearArray(){
    let temp = [];
@@ -130,17 +130,21 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
     // this.showSearchData = true;
     let file = this.file;//event.srcElement.files[0];
     //let URL = Constant.uploadFile;
-    if(this.initialForm.value.fileType === 'raw') 
+    if(this.initialForm.value.fileType === 'raw') { 
         URL = Constant.uploadFile;
-    else 
-        URL = ''; 
+    } else {
+        URL = '';
+    }
 
     let data =this.formData;
     console.log('THISSS', JSON.stringify(JSON.stringify(this.initialForm.value)));
     
     this.common.postDataService(URL, data).subscribe((resp) => {
-   
-      this.openDialog();
+      
+      if(resp === 'success'){
+        this.openDialog();
+      }
+    
       this.spinner.hide();
     }, (error) => {
       console.log('Error', error);

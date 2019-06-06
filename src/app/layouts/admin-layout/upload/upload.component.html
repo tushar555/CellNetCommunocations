@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-md-2">
                   <mat-form-field class="example-full-width">
-                    <mat-select formControlName="productName" placeholder="Product Name">
+                    <mat-select formControlName="productName"  placeholder="Product Name">
                       <mat-option *ngFor="let pr of ProductArray" [value]="pr.value">
                         {{pr.Name}}
                       </mat-option>
@@ -44,8 +44,8 @@
                 </div>
                 <div class="col-md-2">
                   <mat-form-field class="example-full-width">
-                    <mat-select formControlName="year" (selectionChange)="getMonths($event)" placeholder="Select Year">
-                      <mat-option *ngFor="let year of YearArray"    [value]="year">
+                    <mat-select formControlName="year"  name="year" (selectionChange)="getMonths($event)" placeholder="Select Year">
+                      <mat-option *ngFor="let year of YearArray" name="year" [value]="year">
                         {{year}}
                       </mat-option>
                     </mat-select>
@@ -54,7 +54,7 @@
                 <div class="col-md-2">
                   <mat-form-field class="example-full-width">
                     <mat-select formControlName="month"  placeholder="Select Month">
-                      <mat-option *ngFor="let month of MonthArray;let i = index" [value]="i">
+                      <mat-option *ngFor="let month of MonthArray;let i = index" [value]="i+1">
                         {{month}}
                       </mat-option>
                     </mat-select>

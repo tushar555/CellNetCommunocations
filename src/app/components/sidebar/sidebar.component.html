@@ -55,8 +55,8 @@
             </li> -->
         </ul>
     </div>
-    <ul class="nav">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+    <ul class="nav ">
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item nav-li">
             <a class="nav-link" (click)="gotoLink(menuItem)">
                 <i class="material-icons">{{menuItem.icon}}</i>
                 <p>{{menuItem.title}}</p>

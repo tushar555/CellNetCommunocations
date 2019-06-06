@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Constant } from '../../assets/data/constant';
 import { LocalStorageService } from "ngx-store/src/ngx-store";
 
@@ -12,8 +12,13 @@ export class AuthService {
     console.log('URL', url);
     console.log('data', data);
 
-    let headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
+   // let headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
     // return this.http.get(url);
+    let headers = new HttpHeaders();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+
     return this.http.post(url, data, { headers: headers });
   }
 

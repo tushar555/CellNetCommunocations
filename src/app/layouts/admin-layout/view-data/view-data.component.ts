@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { Constant } from "assets/data/constant";
-import { CommonService } from "app/service/common.service";
+import { Constant } from 'assets/data/constant';
+import { CommonService } from 'app/service/common.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import {MatPaginator, MatTableDataSource, MatBottomSheet, MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from '@angular/material';
@@ -11,13 +11,13 @@ declare var jquery: any;
 declare var $: any;
 
 const ELEMENT_DATA: any[] = [
-  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD:1000},
-  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD:1000},
-  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD:1000},
-  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD:1000},
-  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD:1000},
-  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD:1000},
-  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD:1000},  
+  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD: 1000},
+  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD: 1000},
+  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD: 1000},
+  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD: 1000},
+  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD: 1000},
+  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD: 1000},
+  {account: 1234567, full_name: 'Amey Marathe', msd_cur_bal: 23000, principle_bal: 500000, DPD: 1000},
 ];
 
 
@@ -27,31 +27,32 @@ const ELEMENT_DATA: any[] = [
   templateUrl: './view-data.component.html',
   styleUrls: ['./view-data.component.scss']
 })
-export class ViewDataComponent extends BaseModalCompoent implements OnInit{
+export class ViewDataComponent extends BaseModalCompoent implements OnInit {
   filterArray: { 'property': string; 'value': string; }[];
   optionsArray: any = [];
   BankNameArray: { 'Name': string; 'value': string; }[];
   ProductArray: { 'Name': string; 'value': string; }[];
-  showDiv:any;
-  bankName:any;
-  productName:any;
+  showDiv: any;
+  bankName: any;
+  productName: any;
 
-  isBtnDisabled: boolean = true;
+  isBtnDisabled = true;
 
   displayedColumns: string[];
   dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  showEmployeeFilter: boolean = false;
+  showEmployeeFilter = false;
   pageNo: any = 1;
-  pageArray=[0];
+  pageArray = [0];
   selectedFlag: any;
   detailedArray: any;
-  options = { 
+  empName: any = '';
+  options = {
     fieldSeparator: ',',
     quoteStrings: '"',
     decimalSeparator: '.',
-    showLabels: true, 
+    showLabels: true,
     showTitle: true,
     title: 'My Awesome CSV',
     useTextFile: false,
@@ -116,17 +117,17 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
 
   }
 
-  
+
   openBottomSheet(element): void {
     this.spinner.show();
     console.log('element', element);
-    let URL= Constant.showDetailData;
-    let data = {"id":element.id}
-    this.common.postDataService(URL, data).subscribe((resp:any)=>{
+    const URL = Constant.showDetailData;
+    const data = {'id': element.id}
+    this.common.postDataService(URL, data).subscribe((resp: any) => {
       console.log(resp);
 
       this.spinner.hide();
-      
+
     this.bottomSheet.open(BaseModalCompoent, {
       data: resp.data,
     });
@@ -136,7 +137,7 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
     console.log('Event', event);
     this.spinner.show();
     if (event === 'Employee') {
-     
+
     }
     this.spinner.hide();
 
@@ -145,92 +146,95 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
   ngOnInit() {
   }
 
-  showMoreData(){
-    $("#conformationModal").modal('show');
+  showMoreData() {
+    $('#conformationModal').modal('show');
   }
 
-  onSubmit(flag){
-    
+  onSubmit(flag) {
+
     this.spinner.show();
-    let URL = Constant.showData;
-    let data = {
-      'bank':this.bankName,
-      'loanType':this.productName,
-      'limit':this.pageNo,
-      'search':'',
-      'duplicate':''
+    const URL = Constant.showData;
+    const data = {
+      'bank': this.bankName,
+      'loanType': this.productName,
+      'limit': this.pageNo,
+      'search': '',
+      'duplicate': flag,
+      'empName': this.empName
   }
+console.log('HELL', data);
 
   this.selectedFlag = flag;
-   this.common.postDataService(URL, data).subscribe((result:any)=>{
+   this.common.postDataService(URL, data).subscribe((result: any) => {
     console.log('FLAG', result);
-    if(result.data.length===0){
+    if (result.data.length === 0) {
       this.common.showSnackbar({ 'status': 'No Record Found!' })
-     
-    }else{
+
+    } else {
       this.detailedArray = result.data
-      let keyArray= [];
-      Object.keys(result.data[1]).forEach((key)=>{
-       if( flag !== '')
+      const keyArray = [];
+      Object.keys(result.data[1]).forEach((key) => {
+       if ( flag !== '') {
          keyArray.push(key)
-       else if(key !=='count'){
-         keyArray.push(key) 
+       } else if (key !== 'count') {
+         keyArray.push(key)
        }
-          
+
       })
-      keyArray.push("Action")
-     
+      keyArray.push('Action')
+
       this.displayedColumns = keyArray;
-  
-        if( flag == 'duplicate')
+
+        if ( flag === 'duplicate') {
            this.onDuplicateClick(result);
-        else
-           this.onShowDataClick(result);     
-  
+        } else {
+           this.onShowDataClick(result);
+        }
+
     }
 
        this.spinner.hide();
     })
   }
 
-  onShowDataClick(result){
-    this.dataSource =result.data; 
+  onShowDataClick(result) {
+    this.dataSource = result.data;
     console.log('LLLL', this.dataSource);
-    
-    this.pageArray = Array.from(Array(Math.floor(result.count/100)), (_,i) => i+1);
+
+    this.pageArray = Array.from(Array(Math.floor(result.count / 100)), (_, i) => i + 1);
   }
 
-  onDuplicateClick(result){
+  onDuplicateClick(result) {
     console.log(result.data);
-    let newArray = result.data.filter(obj=>obj.count>0);
-   
-    this.dataSource =newArray; 
-    this.pageArray = Array.from(Array(Math.floor(result.count/100)), (_,i) => i+1);
+    const newArray = result.data ;//.filter(obj => obj.count > 0);
+
+    this.dataSource = newArray;
+    this.pageArray = Array.from(Array(Math.floor(result.count / 100)), (_, i) => i + 1);
 
   }
 
-  exportCSV(){
-    if(this.detailedArray){
+  exportCSV() {
+    if (this.detailedArray) {
       const csvExporter = new ExportToCsv(this.options);
 
       csvExporter.generateCsv(this.detailedArray);
-    }else{
+    } else {
       this.common.showSnackbar({ 'status': 'No Record Found!' })
 
     }
 
   }
 
-  getUpdate(event){
-    console.log('EEE',event.pageSize);
+  getUpdate(event) {
+    console.log('EEE', event.pageSize);
     this.pageNo = event.pageSize;
     this.onSubmit( this.selectedFlag);
   }
-  advanceSearch(){
-    this.showDiv=!this.showDiv;
+  advanceSearch() {
+    this.showDiv = !this.showDiv;
     this.showEmployeeFilter = !this.showEmployeeFilter;
     if (this.optionsArray.length === 0) {
-      let URL = Constant.getEmpDetails;
+      const URL = Constant.getEmpDetails;
       this.common.getData(URL).subscribe((resp: any) => {
         this.optionsArray = resp.response.filter(obj => obj.role !== 'admin');
       });
@@ -238,11 +242,11 @@ export class ViewDataComponent extends BaseModalCompoent implements OnInit{
   }
 
 
- 
-  showData(){
+
+  showData() {
     console.log(this.bankName, this.productName);
-    
-    if(typeof this.bankName !== 'undefined' && typeof this.productName !== 'undefined' !){
+
+    if (typeof this.bankName !== 'undefined' && typeof this.productName !== 'undefined' !) {
       this.isBtnDisabled = false;
     }
   }
