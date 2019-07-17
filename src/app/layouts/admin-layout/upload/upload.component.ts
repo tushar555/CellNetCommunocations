@@ -125,6 +125,7 @@ export class UploadComponent extends BasePopupCompoent implements OnInit {
   }
 
   uploadCSV(event) {
+    debugger;
     this.spinner.show();
     var URL= '';
     // this.showSearchData = true;
