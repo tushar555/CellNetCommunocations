@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-md-2">
                   <mat-form-field class="example-full-width">
-                    <mat-select formControlName="productName"  placeholder="Product Name">
+                    <mat-select formControlName="productName" placeholder="Product Name">
                       <mat-option *ngFor="let pr of ProductArray" [value]="pr.value">
                         {{pr.Name}}
                       </mat-option>
@@ -35,7 +35,8 @@
                 </div>
                 <div class="col-md-2">
                   <mat-form-field class="example-full-width">
-                    <mat-select formControlName="fileType" placeholder="File Type">
+                    <mat-select formControlName="fileType" (selectionChange)="onFileChange($event)"
+                      placeholder="File Type">
                       <mat-option *ngFor="let file of FileArray" [value]="file.value">
                         {{file.Name}}
                       </mat-option>
@@ -44,7 +45,8 @@
                 </div>
                 <div class="col-md-2">
                   <mat-form-field class="example-full-width">
-                    <mat-select formControlName="year"  name="year" (selectionChange)="getMonths($event)" placeholder="Select Year">
+                    <mat-select formControlName="year" name="year" (selectionChange)="getMonths($event)"
+                      placeholder="Select Year">
                       <mat-option *ngFor="let year of YearArray" name="year" [value]="year">
                         {{year}}
                       </mat-option>
@@ -53,14 +55,23 @@
                 </div>
                 <div class="col-md-2">
                   <mat-form-field class="example-full-width">
-                    <mat-select formControlName="month"  placeholder="Select Month">
+                    <mat-select formControlName="month" placeholder="Select Month">
                       <mat-option *ngFor="let month of MonthArray;let i = index" [value]="i+1">
                         {{month}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
-                
+                <div class="col-md-2" *ngIf='this.initialForm.get("fileType").value === "allocation"'>
+                  <mat-form-field class="example-full-width">
+                    <mat-select formControlName="employeeName" placeholder="Select Employee">
+                      <mat-option *ngFor="let emp of EmployeeArray;let i = index" [value]="emp?.empID">
+                        {{emp?.full_name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
                 <!-- <div class="col-md-4">
                   <mat-form-field class="example-full-width">
                     <input matInput placeholder="Email address" type="email">
@@ -105,9 +116,10 @@
                   </mat-form-field>
                 </div>
               </div> -->
-                <!-- <button mat-raised-button type="submit" (click)="openDialog()">AAAA</button> -->
+              <!-- <button mat-raised-button type="submit" (click)="openDialog()">AAAA</button> -->
 
-              <button mat-raised-button type="submit" [disabled]='!initialForm.valid  || !fileSelected || notCorrectFile' (click)="uploadCSV()"
+              <button mat-raised-button type="submit"
+                [disabled]='!initialForm.valid  || !fileSelected || notCorrectFile' (click)="uploadCSV()"
                 class=" btn pull-right">Upload File</button>
               <div class="clearfix"></div>
             </form>

@@ -5,27 +5,31 @@
 }
 
 
+.mat-bottom-sheet-container-large {
+    min-width: 184vh !important;
+}
 
 // input[type="checkbox"]{
 //     width: 50px; /*Desired width*/
 //     height: 50px; /*Desired height*/
 //   }
 
-.advance_search{
-    .search{
+.advance_search {
+    .search {
         width: 13rem;
     }
 }
 
 
-.checkbox{
+.checkbox {
     position: absolute;
     top: 21px;
 }
 
-.table thead th{
-    color: #fff 
+.table thead th {
+    color: #fff
 }
+
 .search {
     width: 20rem;
     display: inline;
@@ -42,13 +46,13 @@
 }
 
 .card-header-danger {
-   // background: #686161 !important;
-    background: #fff !important; 
-   box-shadow: none !important;
+    // background: #686161 !important;
+    background: #fff !important;
+    box-shadow: none !important;
     padding: 4px !important;
 }
 
-.thead-background{
+.thead-background {
     background: #686161 !important;
 }
 
@@ -56,10 +60,10 @@
 
 table {
     width: 100%;
-  }
+}
 
-  .table-container{
+.table-container {
     margin-top: 10px;
     max-height: 450px;
     overflow: auto;
-  }
+}
